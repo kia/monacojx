@@ -10,3 +10,6 @@ and the JavaScript code of monaco editor is executed in the jxbrowser.
 
 ## licence key
 To start the application you need a licence key for jxbrowser. 
+
+## start by maven
+<code>mvn javafx:run -Djxbrowser.license.key=<license key></code>

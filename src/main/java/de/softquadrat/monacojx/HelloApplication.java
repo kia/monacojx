@@ -15,8 +15,6 @@ public class HelloApplication extends Application {
         MonacoEditor monacoEditor =  new MonacoEditorFactoryImpl().newInstance();
         monacoEditor.init();
         BrowserView browserView = monacoEditor.getBrowserView();
-        System.out.println(" -> " + browserView.getBrowser().settings().isAllowJavaScriptAccessClipboard());
-        monacoEditor.updateText("this is a bit more!");
 
         Scene scene = new Scene(new BorderPane(browserView), 700, 500);
         stage.setTitle("JavaFx BrowserView");
