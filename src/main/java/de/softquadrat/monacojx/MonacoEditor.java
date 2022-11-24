@@ -33,7 +33,7 @@ public class MonacoEditor {
         JsObject window = executeJavaScript("window");
         window.putProperty("clipboardBridge", clipboardBridge);
 
-        addContextMenuAction(new PasteAction());
+        //addContextMenuAction(new PasteAction());
 
         browser.on(ConsoleMessageReceived.class, event -> {
             String message = event.consoleMessage().message();
