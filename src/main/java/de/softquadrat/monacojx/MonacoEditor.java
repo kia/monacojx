@@ -2,17 +2,23 @@ package de.softquadrat.monacojx;
 
 import com.teamdev.jxbrowser.browser.Browser;
 import com.teamdev.jxbrowser.browser.event.ConsoleMessageReceived;
+import com.teamdev.jxbrowser.engine.Engine;
+import com.teamdev.jxbrowser.engine.RenderingMode;
 import com.teamdev.jxbrowser.js.JsObject;
+import com.teamdev.jxbrowser.permission.callback.RequestPermissionCallback;
 import com.teamdev.jxbrowser.view.javafx.BrowserView;
+import javafx.application.Platform;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
-
+import static com.teamdev.jxbrowser.permission.PermissionType.CLIPBOARD_READ_WRITE;
 
 public class MonacoEditor {
 
     private final static String EDITOR_HTML_RESOURCE_LOCATION = "/de/softquadrat/monacojx/monaco-editor/index.html";
+
+
     private final Browser browser;
     private final BrowserView browserView;
     private boolean readOnly = false;
@@ -30,8 +36,8 @@ public class MonacoEditor {
         SystemClipboardWrapper systemClipboard = new SystemClipboardWrapper();
         ClipboardBridge clipboardBridge = new ClipboardBridge(document, systemClipboard);
 
-        JsObject window = executeJavaScript("window");
-        window.putProperty("clipboardBridge", clipboardBridge);
+        //JsObject window = executeJavaScript("window");
+        //window.putProperty("clipboardBridge", clipboardBridge);
 
         //addContextMenuAction(new PasteAction());
 
@@ -54,7 +60,9 @@ public class MonacoEditor {
 
     public JsObject executeJavaScript(String script) {
         AtomicReference<JsObject> jsObject = new AtomicReference<>();
-        browser.mainFrame().ifPresent(frame -> jsObject.set(frame.executeJavaScript(script)));
+        Platform.runLater(() -> {
+            browser.mainFrame().ifPresent(frame -> jsObject.set(frame.executeJavaScript(script)));
+        });
         return jsObject.get();
     }
 

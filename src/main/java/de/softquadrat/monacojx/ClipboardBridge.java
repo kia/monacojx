@@ -81,15 +81,15 @@ public final class ClipboardBridge {
 	 */
 	@JsAccessible
 	public JsObject paste(JsObject jsSelection, JsObject position) {
-
-		if (systemClipboardWrapper.hasString()) {
-			String pasteString = systemClipboardWrapper.getString();
-			String originText = document.getText();
-			String changedText = addPasteString(jsSelection, pasteString, originText);
-			document.updateText(changedText);
-			calcNewCursorPosition(position, pasteString);
-		}
-
+		Platform.runLater(() -> {
+			if (systemClipboardWrapper.hasString()) {
+				String pasteString = systemClipboardWrapper.getString();
+				String originText = document.getText();
+				String changedText = addPasteString(jsSelection, pasteString, originText);
+				document.updateText(changedText);
+				calcNewCursorPosition(position, pasteString);
+			}
+		});
 		return position;
 	}
 
