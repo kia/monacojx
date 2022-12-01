@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.2</junit.version>
         <jxbrowser.version>7.27</jxbrowser.version>
-        <jxbrowser.license.key>${jxbrowser.license.key}</jxbrowser.license.key>
+        <jxbrowser.license.key>${jxbrowser-license-key}</jxbrowser.license.key>
     </properties>
 
     <repositories>
@@ -88,7 +88,7 @@
                         <configuration>
                             <mainClass>de.softquadrat.monacojx/de.softquadrat.monacojx.HelloApplication</mainClass>
                             <options>
-                                <option>-Djxbrowser.license.key=${jxbrowser.license.key}</option>
+                                <option>-Djxbrowser.license.key=${jxbrowser-license-key}</option>
                                 <option>-Djxbrowser.logging.level=DEBUG</option>
                             </options>
                             <launcher>app</launcher>
